@@ -1,6 +1,6 @@
 {
   "name": "sse-coordinator",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Share a single SSE connection across browser tabs using BroadcastChannel leader election",
   "keywords": [
     "sse",
