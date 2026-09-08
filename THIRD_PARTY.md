@@ -18,6 +18,6 @@ is included.
 
 ## Reviewed and cleared
 
-Nothing yet. Findings from `scripts/provenance-check.py` that turn out to be
+Nothing yet. Findings from `oss provenance sse-coordinator` that turn out to be
 convergent output rather than copying belong here, with the date and the
 reasoning.
