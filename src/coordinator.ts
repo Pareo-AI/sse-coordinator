@@ -102,8 +102,6 @@ export class SSECoordinator {
   }
 
   disconnect(): void {
-    this.lockAbortController?.abort(); // cancel pending lock request if still queued
-    this.releaseLock?.();              // release held lock if leader
     this.cleanup();
   }
 
@@ -257,6 +255,13 @@ export class SSECoordinator {
   }
 
   private cleanup(): void {
+    // Both exit paths (disconnect, and connect() re-entering on an already-active
+    // instance) route through here, so the Web Lock has to be let go right here too.
+    // Without this, releaseLock is nulled below while the navigator.locks.request()
+    // callback it belongs to is still awaiting it, which never returns, so the
+    // browser holds this tab's lock forever and no other tab can ever take over.
+    this.lockAbortController?.abort(); // cancel the lock request if it is still queued
+    this.releaseLock?.();              // release it if this tab is already holding it
     this.closeEventSource();
     this.stopReconnectTimer();
     this.removeRecoveryListeners();

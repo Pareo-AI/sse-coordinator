@@ -309,6 +309,20 @@ describe('SSECoordinator', () => {
 
       expect(firstChannel.close).toHaveBeenCalled();
     });
+
+    it('releases the held Web Lock so the second connect() can become leader too', async () => {
+      coordinator = new SSECoordinator();
+      coordinator.connect({ url: TEST_URL, eventTypes: TEST_EVENTS, onEvent: () => {} });
+      expect(coordinator.isLeader()).toBe(true);
+
+      // Re-entrant connect() cleans up the first lock request; if that request's
+      // releaseLock is never called, the underlying lock is held forever and this
+      // second request queues behind it forever instead of becoming leader.
+      coordinator.connect({ url: TEST_URL, eventTypes: TEST_EVENTS, onEvent: () => {} });
+      for (let i = 0; i < 10; i++) await Promise.resolve();
+
+      expect(coordinator.isLeader()).toBe(true);
+    });
   });
 
   describe('BroadcastChannel message validation', () => {
