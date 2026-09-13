@@ -1,0 +1,44 @@
+name: Release
+
+# Publishes to npm when a version tag is pushed, e.g. `git tag v0.3.3 && git
+# push --tags`. workflow_dispatch is here for one honest reason: v0.3.2 was
+# tagged and released on GitHub while nothing ever reached the registry, and a
+# version that already carries its tag cannot be published by pushing it again.
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      id-token: write # required for npm trusted publishing (OIDC)
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: latest
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Typecheck
+        run: bun run typecheck
+      - name: Test
+        run: bun test
+      # Trusted publishing needs npm 11.5.1 or newer, which the Node version
+      # alone does not guarantee.
+      - name: Use an npm that can mint an OIDC token
+        run: npm install -g npm@latest
+      # package.json's prepublishOnly runs the build, so the tarball is built
+      # from the tree this job just checked and tested.
+      - name: Publish
+        run: npm publish
