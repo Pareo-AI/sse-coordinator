@@ -22,7 +22,7 @@ are origin-scoped).
 
 ## Run it online (StackBlitz)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/john-athan/sse-coordinator/tree/main/examples/demo)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/Pareo-AI/sse-coordinator/tree/main/examples/demo)
 
 ⚠️ **One gotcha:** to see cross-tab coordination you must open multiple tabs on
 the **same preview origin** — *not* the StackBlitz project URL twice.

@@ -4,7 +4,7 @@
 [![bundle size](https://img.shields.io/bundlephobia/minzip/sse-coordinator)](https://bundlephobia.com/package/sse-coordinator)
 [![license](https://img.shields.io/npm/l/sse-coordinator)](./LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-ready-blue)](https://www.typescriptlang.org/)
-[![Open the live demo on StackBlitz](https://img.shields.io/badge/live%20demo-StackBlitz-1389FD)](https://stackblitz.com/github/john-athan/sse-coordinator/tree/main/examples/demo)
+[![Open the live demo on StackBlitz](https://img.shields.io/badge/live%20demo-StackBlitz-1389FD)](https://stackblitz.com/github/Pareo-AI/sse-coordinator/tree/main/examples/demo)
 
 Share a single SSE connection across all browser tabs using BroadcastChannel leader election.
 

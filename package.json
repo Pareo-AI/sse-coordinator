@@ -20,12 +20,12 @@
   ],
   "license": "MIT",
   "author": "Jonathan Kaleve",
-  "homepage": "https://github.com/john-athan/sse-coordinator#readme",
+  "homepage": "https://github.com/Pareo-AI/sse-coordinator#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/john-athan/sse-coordinator.git"
+    "url": "git+https://github.com/Pareo-AI/sse-coordinator.git"
   },
-  "bugs": "https://github.com/john-athan/sse-coordinator/issues",
+  "bugs": "https://github.com/Pareo-AI/sse-coordinator/issues",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
