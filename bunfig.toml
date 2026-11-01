@@ -1,0 +1,5 @@
+# A new package version waits seven days before bun installs it (platform ADR-0417). 604800 is
+# seven days in seconds. A security fix skips the wait for the one package it fixes:
+# `bun add <pkg>@<version> --minimum-release-age 0`.
+[install]
+minimumReleaseAge = 604800
