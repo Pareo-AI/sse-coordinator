@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "timezone": "UTC",
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
+  "vulnerabilityAlerts": { "enabled": true, "minimumReleaseAge": null },
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 2,
+  "semanticCommits": "enabled",
+  "commitMessagePrefix": "chore(deps):",
+  "labels": ["dependencies"],
+  "reviewers": ["team:Pareo-AI/engineering"],
+  "separateMajorMinor": true,
+  "groupName": "all-dependencies",
+  "groupSlug": "all-dependencies",
+  "ignorePaths": ["**/node_modules/**"],
+  "packageRules": [
+    {
+      "description": "Single PR: group every update together",
+      "matchPackageNames": ["*"],
+      "groupName": "all-dependencies",
+      "groupSlug": "all-dependencies"
+    },
+    {
+      "description": "Majors ride in their own PR, so a breaking major never blocks the week's patches.",
+      "matchUpdateTypes": ["major"],
+      "groupName": "major-updates",
+      "groupSlug": "major-updates",
+      "addLabels": ["major"]
+    },
+    {
+      "description": "Biome is pinned across every JavaScript package in ~/pareo by platform tooling/biome/base.json and flows out through sync.mjs --write. Bump it there, not here.",
+      "matchPackageNames": ["@biomejs/biome"],
+      "enabled": false
+    }
+  ]
+}
